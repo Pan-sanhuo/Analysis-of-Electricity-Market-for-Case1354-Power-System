@@ -8,11 +8,13 @@
 *.xls
 *.csv
 *.json
-results/
+/results/*
+!/results/README.md
 output/
 
 # Local input data should be configured by each user
-data/
+/data/*
+!/data/README.md
 
 # Operating-system and IDE files
 .DS_Store

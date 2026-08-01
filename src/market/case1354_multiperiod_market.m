@@ -131,6 +131,7 @@ precheck=table(hours(:),inputLoad,onlinePmax,onlinePmax-inputLoad,feasible,messa
 end
 
 function c = defaults(user)
+projectRoot=fileparts(fileparts(fileparts(mfilename('fullpath'))));
 c = struct('dataFile','D:\桌面\潮流\资料\case1354cdf-V2.9和说明2.xlsx', ...
  'outDir','D:\桌面\潮流\结果\case1354\New', 'outFile','', 'matpowerPath','D:\Program Files\MATLAB\matpower8.1', ...
  'targetHours',1:24,'mode','SCED','verbose',0,'useIntertemporalRamp',true, ...
@@ -144,6 +145,15 @@ c = struct('dataFile','D:\桌面\潮流\资料\case1354cdf-V2.9和说明2.xlsx',
  'regulationResponseMinutes',5,'spinResponseMinutes',10,'nonSpinResponseMinutes',30,'marketMode','production', ...
  'missingBidPolicy','error','bidMWMode','breakpoint','marketPriceFloor',-1000,'marketPriceCap',10000);
 f = fieldnames(user); for k=1:numel(f), c.(f{k})=user.(f{k}); end
+if ~isfield(user,'dataFile')
+    c.dataFile=fullfile(projectRoot,'data','case1354cdf-V2.9和说明2.xlsx');
+end
+if ~isfield(user,'outDir') && ~isfield(user,'outFile')
+    c.outDir=fullfile(projectRoot,'results');
+end
+if ~isfield(user,'matpowerPath')
+    c.matpowerPath='';
+end
 c.mode = upper(string(c.mode));
 if ~any(c.mode == ["SCED","SCUC"]), error('case1354:InvalidMode','mode must be SCED or SCUC.'); end
 end

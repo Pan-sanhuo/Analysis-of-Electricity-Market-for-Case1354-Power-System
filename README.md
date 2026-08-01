@@ -10,31 +10,38 @@ This repository is a learning-oriented MATLAB project for analysing the Case1354
 
 The input workbook is deliberately not included in this repository. Configure its local path through `config.dataFile` before running the model.
 
-## Main Programs
+## Project Structure
 
-| File | Purpose |
+| Directory / file | Purpose |
 | --- | --- |
-| `case1354_multiperiod_market.m` | Main 24-hour joint DC market model. Use `mode = "SCED"` for fixed commitment or `mode = "SCUC"` when a MILP solver is available. |
-| `case1354cljs.m` | Hour-by-hour AC optimal-power-flow validation and reactive-power check. |
-| `build_matpower_case.m` | Converts the Excel tables to a MATPOWER case structure. |
-| `build_gencost_matrix.m` | Builds generator bid/cost curves and performs bid validation. |
-| `add_auxiliary_services_to_most.m` | Adds regulation and reserve co-optimization. |
-| `add_demand_response_to_most.m` | Adds price-responsive demand and interruption variables. |
-| `build_n1_contingencies.m` | Creates screened N-1 line, transformer, and generator contingencies. |
+| `src/market/` | Main 24-hour SCED/SCUC market model, ancillary services, demand response, N-1 contingencies, and settlement. |
+| `src/ac_opf/` | Hour-by-hour AC-OPF validation, warm start, and feasibility-recovery utilities. |
+| `src/model/` | Excel reading, MATPOWER case construction, bid building, schedules, and input checks. |
+| `src/constraints/` | Ramping, transmission, and market-flow constraint functions. |
+| `src/results/` | Excel/MAT/JSON/CSV result tables and traceability artifacts. |
+| `config/` | A portable configuration example. |
+| `tests/` | Focused regression tests for market-model functions. |
+| `data/` | Local input Excel location; data files are intentionally not version controlled. |
+| `results/` | Local generated outputs; ignored by Git. |
+| `docs/` | Project organization and modelling notes. |
+| `startup_case1354.m` | Adds all source and test directories to the MATLAB path. |
 
 ## Quick Start
 
 ```matlab
 addpath(genpath('D:\\Program Files\\MATLAB\\matpower8.1'));
+startup_case1354;
 
 config = struct();
 config.dataFile = 'D:\\path\\to\\case1354cdf-V2.9和说明2.xlsx';
-config.outDir = 'D:\\path\\to\\results';
+config.outDir = fullfile(pwd, 'results');
 config.outFile = fullfile(config.outDir, 'case1354_multiperiod_sced.xlsx');
 config.mode = 'SCED';
 
 results = case1354_multiperiod_market(config);
 ```
+
+`config/case1354_config_example.m` contains the same portable configuration pattern. For tests, set the environment variable `CASE1354_DATA_FILE` to the absolute path of the input workbook, then run `run_case1354_regression_suite`.
 
 To enable the screened N-1 model, set `config.useSecurityConstraints = true`. The default market model is a DC multi-period dispatch; use `case1354cljs` separately to assess AC feasibility, voltage, and reactive-power behaviour.
 

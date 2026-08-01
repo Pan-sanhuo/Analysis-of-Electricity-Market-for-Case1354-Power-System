@@ -114,6 +114,11 @@ c=struct('dataFile','D:\桌面\潮流\资料\case1354cdf-V2.9和说明2.xlsx', .
 % rejected until the source workbook supplies current units/base conversion.
 c.branchLimitType='MW';
 c.outFile=fullfile(c.outDir,'case1354cljs_New.xlsx');
+projectRoot=fileparts(fileparts(fileparts(mfilename('fullpath'))));
+c.dataFile=fullfile(projectRoot,'data','case1354cdf-V2.9和说明2.xlsx');
+c.outDir=fullfile(projectRoot,'results');
+c.outFile=fullfile(c.outDir,'case1354cljs.xlsx');
+c.matpowerPath='';
 end
 function c=merge_config(c,u), f=fieldnames(u);for i=1:numel(f),c.(f{i})=u.(f{i});end;if isempty(c.outFile)|| (isfield(u,'outDir') && ~isfield(u,'outFile')),c.outFile=fullfile(c.outDir,'case1354cljs.xlsx');end,end
 function check_environment(c)
