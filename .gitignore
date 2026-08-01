@@ -1,0 +1,20 @@
+# MATLAB generated files and editor backups
+*.asv
+*.autosave
+*.mat
+
+# Generated market outputs
+*.xlsx
+*.xls
+*.csv
+*.json
+results/
+output/
+
+# Local input data should be configured by each user
+data/
+
+# Operating-system and IDE files
+.DS_Store
+Thumbs.db
+.vscode/
