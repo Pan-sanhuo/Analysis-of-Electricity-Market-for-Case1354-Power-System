@@ -1,0 +1,15 @@
+{
+  "RunId": "20260801_140214_208",
+  "StartTime": "2026-08-01 14:02:14",
+  "EndTime": "2026-08-01 14:03:07",
+  "ElapsedSeconds": 53.4959105,
+  "InputFile": "D:\\桌面\\潮流\\资料\\case1354cdf-V2.9和说明2.xlsx",
+  "InputSHA256": "239fc8ce46b359921670321b6dd6da5f0c97f430a34affd34336c62c693df2f4",
+  "InputBytes": 1.159834E+6,
+  "InputModified": "07-7月-2026 20:45:44",
+  "EntryPoint": "D:\\桌面\\潮流\\Matlab代码\\case1354\\潮流计算代码\\New\\case1354_multiperiod_market.m",
+  "CodeSHA256": "44a928122861bc0bf08653efd0145d17f8beb44d98af35b04ace966424576781",
+  "MATLABVersion": "9.14.0.2206163 (R2023a)",
+  "MATPOWERVersion": "8.1",
+  "OutputExcel": "D:\\桌面\\潮流\\结果\\case1354\\New\\case1354_multiperiod_sced.xlsx"
+}

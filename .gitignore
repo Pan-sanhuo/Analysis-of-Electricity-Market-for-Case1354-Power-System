@@ -10,6 +10,8 @@
 *.json
 /results/*
 !/results/README.md
+!/results/main/
+!/results/main/**
 output/
 
 # Local input data should be configured by each user
